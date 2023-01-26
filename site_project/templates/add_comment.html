@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Add comment.{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+
+<!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+      <div class="container">
+        <h2>Add comment</h2>
+       </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
+             <div class="row mt-5">
+                 <div class="col-lg-8 mt-5 mt-lg-0">
+                     <form method="POST">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <button class="btn btn-dark">Add comment.</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endif %}
+
+{% endblock %}

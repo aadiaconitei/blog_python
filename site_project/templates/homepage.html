@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block hero %}
+{% include "hero.html" %}
+{% endblock %}
+
+{% block content %}
+
+{% include "all_categories.html" %}
+<!-- ======= Popular Courses Section ======= -->
+    <section id="popular-courses" class="courses">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Courses</h2>
+          <p>Popular Courses</p>
+        </div>
+
+        <div class="row" data-aos="zoom-in" data-aos-delay="100">
+{% for post in latest reversed %}
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="course-item">
+
+                 {% if post.header_image %}
+                <img src="{{ post.header_image.url }}" class="img-fluid img-center" alt="...">
+                {% else %}
+                <img src="{% static 'html.jpg' %}" alt="" class="img-fluid img-center" alt="...">
+                {% endif %}
+
+
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4> <a href="{% url 'category' post.category_id %}">{{ post.category }}</a></h4>
+                  <p class="price">Free</p>
+                </div>
+
+                <h3><a href="{% url 'post' post.id %}">{{ post.title }}</a></h3>
+                <p>{{ post.title_tag }}.  {{ post.snippet|safe }}</p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                    <img src="assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
+                    <span>{{post.owner}} - {{post.post_date}}</span>
+                  </div>
+                  <div class="trainer-rank d-flex align-items-center">
+                    <i class="bx bx-user"></i>&nbsp;50
+                    &nbsp;&nbsp;
+                    <i class="bx bx-heart"></i>&nbsp;{{post.total_likes}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> <!-- End Course Item-->
+ {% endfor %}
+        </div>
+
+      </div>
+    </section><!-- End Popular Courses Section -->
+
+
+
+{% endblock %}
